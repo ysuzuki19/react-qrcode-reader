@@ -1,0 +1,43 @@
+{
+  "name": "react-qrcode-reader-demo",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@types/node": "^16.11.0",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0",
+    "jsqr": "^1.4.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-qrcode-reader": "^0.1.0",
+    "react-scripts": "4.0.3",
+    "react-webcam": "^6.0.0",
+    "typescript": "^4.1.2",
+    "web-vitals": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "dev": "BROWSER=NONE npm start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
