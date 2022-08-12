@@ -1,6 +1,6 @@
 {
   "name": "react-qrcode-reader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": {
     "name": "ysuzuki19",
     "url": "https://ysuzuki19.github.io"
@@ -33,7 +33,7 @@
     "publish": "npm publish"
   },
   "dependencies": {
-    "@types/node": "^17.0.4",
+    "@types/node": "^18.7.2",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "jsqr": "^1.4.0",
