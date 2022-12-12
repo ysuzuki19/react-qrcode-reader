@@ -60,13 +60,14 @@ export default App;
 
 `<QrCodeReader>` has 3 required props and 2 optional props.
 
-| prop   | type             | instruction             | default |
-| ------ | ---------------- | ----------------------- | ------- |
-| delay  | number           | delay of recapture      |         |
-| width  | number           | width of image          |         |
-| height | number           | height of image         |         |
-| onRead | (QRCode) => void | callback on read qrcode | none    |
-| action | (string) => void | action on read qrcode   | none    |
+| prop     | type             | instruction             | default |
+| -------- | ---------------- | ----------------------- | ------- |
+| delay    | number           | delay of recapture      |         |
+| width    | number           | width of image          |         |
+| height   | number           | height of image         |         |
+| onRead   | (QRCode) => void | callback on read qrcode | none    |
+| action   | (string) => void | action on read qrcode   | none    |
+| deviceId | string           | deviceId for video      | none    |
 
 argument of `onRead` is `QRCode` data. `QRCode` is interface in `jsQR`.
 
