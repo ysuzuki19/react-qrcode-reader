@@ -1,20 +1,46 @@
 import React from 'react';
 
-// import QrCodeReader, { QRCode } from './QrCodeReader';
-import QrCodeReader, { QRCode } from 'react-qrcode-reader';
+import QrCodeReader from 'react-qrcode-reader';
+import { useVideoDeviceInfos } from './use-video-infos';
 
 const App: React.FC = () => {
-  const [val, setVal] = React.useState<string>('');
-
-  const handleRead = (code: QRCode) => {
-    setVal(code.data);
-  };
+  const videoDeviceInfos = useVideoDeviceInfos();
+  const [val, setVal] = React.useState('');
+  const [selected, setSelected] = React.useState('default');
+  const [deviceId, setDeviceId] = React.useState('');
 
   return (
     <>
-      {/* <QrCodeReader delay={100} width={500} height={500} onRead={handleRead} /> */}
-      <QrCodeReader delay={100} width={600} height={500} action={setVal} />
-      {/* <QrCodeReader delay={100} width={600} height={500} /> */}
+      <select
+        name="devices"
+        value={deviceId}
+        onChange={(event) => {
+          setDeviceId(event.target.value);
+          const deviceLabel =
+            videoDeviceInfos.find(
+              (info) => info.deviceId === event.target.value
+            )?.label || 'not selected';
+          setSelected(deviceLabel);
+        }}
+      >
+        {videoDeviceInfos.map((info) => (
+          <option
+            value={info.deviceId}
+            label={info.label}
+            onClick={() => setDeviceId(info.deviceId)}
+          >
+            {info.label}
+          </option>
+        ))}
+      </select>
+      <p>{selected}</p>
+      <QrCodeReader
+        delay={100}
+        width={600}
+        height={500}
+        action={setVal}
+        deviceId={deviceId}
+      />
       <p>{val}</p>
     </>
   );
