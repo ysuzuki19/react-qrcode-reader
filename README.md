@@ -73,5 +73,5 @@ argument of `onRead` is `QRCode` data. `QRCode` is interface in `jsQR`.
 
 argument of `action` is the string included in QRCode. You can simply get value of QRCode by this.
 
-argument of `videoConstraints` is the object included in QRCode. We can build a constraints object by passing it to the videoConstraints prop. Please take a look at the MDN docs to get an understanding how this works:
+argument of `videoConstraints` is the object included in Webcam. We can build a constraints object by passing it to the videoConstraints prop. Please take a look at the MDN docs to get an understanding how this works:
 https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
