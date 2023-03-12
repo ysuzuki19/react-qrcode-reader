@@ -29,7 +29,7 @@
   "scripts": {
     "test": "jest --env=jsdom --verbose",
     "build": "rollup -c",
-    "prepublish": "cp ../README.md . && cp ../LICENSE .&& npm run build",
+    "prepublish": "cp ../README.md . && cp ../LICENSE . && cp ../MIGRATION.md . && npm run build",
     "publish": "npm publish"
   },
   "dependencies": {
