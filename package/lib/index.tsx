@@ -12,7 +12,7 @@ export interface QrCodeReaderProps {
   height: number;
   onRead?: (code: QRCode) => void;
   action?: (str: string) => void;
-  deviceId?: string;
+  videoConstraints?: MediaStreamConstraints["video"];
 }
 
 function QrCodeReader({
@@ -21,7 +21,7 @@ function QrCodeReader({
   height,
   onRead,
   action,
-  deviceId,
+  videoConstraints
 }: QrCodeReaderProps): JSX.Element {
   const webcamRef = React.useRef<Webcam & HTMLVideoElement>(null);
 
@@ -56,7 +56,7 @@ function QrCodeReader({
       ref={webcamRef}
       width={width}
       height={height}
-      videoConstraints={{ deviceId }}
+      videoConstraints={videoConstraints}
     />
   );
 }

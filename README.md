@@ -58,17 +58,20 @@ export default App;
 
 # API
 
-`<QrCodeReader>` has 3 required props and 2 optional props.
+`<QrCodeReader>` has 3 required props and 3 optional props.
 
-| prop     | type             | instruction             | default |
-| -------- | ---------------- | ----------------------- | ------- |
-| delay    | number           | delay of recapture      |         |
-| width    | number           | width of image          |         |
-| height   | number           | height of image         |         |
-| onRead   | (QRCode) => void | callback on read qrcode | none    |
-| action   | (string) => void | action on read qrcode   | none    |
-| deviceId | string           | deviceId for video      | none    |
+| prop             | type             | instruction                             | default |
+| ---------------- | ---------------- | --------------------------------------- | ------- |
+| delay            | number           | delay of recapture                      |         |
+| width            | number           | width of image                          |         |
+| height           | number           | height of image                         |         |
+| onRead           | (QRCode) => void | callback on read qrcode                 | none    |
+| action           | (string) => void | action on read qrcode                   | none    |
+| videoConstraints | object           | MediaStreamConstraints(s) for the video | none    |
 
 argument of `onRead` is `QRCode` data. `QRCode` is interface in `jsQR`.
 
 argument of `action` is the string included in QRCode. You can simply get value of QRCode by this.
+
+argument of `videoConstraints` is the object included in Webcam. We can build a constraints object by passing it to the videoConstraints prop. Please take a look at the MDN docs to get an understanding how this works:
+https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
