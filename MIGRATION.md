@@ -2,6 +2,8 @@
 
 Move `deviceId` prop into `videoConstraints` prop.
 
+### Before
+
 ```typescript
 <QrCodeReader
   delay={100}
@@ -11,6 +13,8 @@ Move `deviceId` prop into `videoConstraints` prop.
   deviceId="YOUR_DEVICE_ID"
 />
 ```
+
+### After
 
 ```typescript
 <QrCodeReader
