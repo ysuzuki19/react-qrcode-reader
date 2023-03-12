@@ -39,7 +39,7 @@ const App: React.FC = () => {
         width={600}
         height={500}
         action={setVal}
-        deviceId={deviceId}
+        videoConstraints={{ deviceId }}
       />
       <p>{val}</p>
     </>

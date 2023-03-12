@@ -108,5 +108,4 @@ yarn.lock
 package/LICENSE
 package/README.md
 
-demo/public/
 demo/package-lock.json
