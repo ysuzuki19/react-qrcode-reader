@@ -107,5 +107,6 @@ yarn.lock
 
 package/LICENSE
 package/README.md
+package/MIGRATION.md
 
 demo/package-lock.json
