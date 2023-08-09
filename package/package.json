@@ -29,6 +29,7 @@
   "scripts": {
     "test": "jest --env=jsdom --verbose",
     "build": "rollup -c",
+    "pack": "npm run build && npm pack",
     "prepublish": "cp ../README.md . && cp ../LICENSE . && cp ../MIGRATION.md . && npm run build",
     "publish": "npm publish"
   },
