@@ -5,7 +5,7 @@ QRCode Reader for modern React
 # install
 
 ```bash
-$ npm install react-qrcode-reader
+$ npm i react-qrcode-reader
 ```
 
 # how to use
@@ -17,7 +17,7 @@ import React from 'react';
 
 import QrCodeReader, { QRCode } from 'react-qrcode-reader';
 
-const App: React.FC = () => {
+export function App() {
   const [val, setVal] = React.useState<string>('');
 
   const handleRead = (code: QRCode) => {
@@ -30,9 +30,7 @@ const App: React.FC = () => {
       <p>{val}</p>
     </>
   );
-};
-
-export default App;
+}
 ```
 
 ## 2. with setter for hook
@@ -42,7 +40,7 @@ import React from 'react';
 
 import QrCodeReader, { QRCode } from 'react-qrcode-reader';
 
-const App: React.FC = () => {
+export function App() {
   const [val, setVal] = React.useState<string>('');
 
   return (
@@ -51,9 +49,7 @@ const App: React.FC = () => {
       <p>{val}</p>
     </>
   );
-};
-
-export default App;
+}
 ```
 
 # API
