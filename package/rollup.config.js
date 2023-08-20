@@ -16,11 +16,18 @@ const dts_config = {
   plugins: [dts()],
 };
 
-const base_plugins = [
+const plugins_for_build = [
   resolve(),
   commonjs(),
   typescript(),
+  babel({
+    babelHelpers: 'bundled',
+    extensions: ['.ts'],
+    exclude: 'node_modules/**',
+  }),
 ]
+
+const external = ['react', 'react-dom'];
 
 const es_config = {
   input: entry,
@@ -28,14 +35,8 @@ const es_config = {
     file: 'dist/index.es.jsx',
     format: 'es',
   },
-  external: ['react', 'react-dom'],
-  plugins: [
-    ...base_plugins,
-    babel({
-      babelHelpers: 'bundled',
-      extensions: ['.ts'],
-    }),
-  ],
+  external,
+  plugins: plugins_for_build,
 };
 
 const umd_config = {
@@ -50,14 +51,9 @@ const umd_config = {
       react: 'react',
     },
   },
-  external: ['react', 'react-dom'],
+  external,
   plugins: [
-    ...base_plugins,
-    babel({
-      babelHelpers: 'bundled',
-      extensions: ['.ts'],
-      exclude: 'node_modules/**',
-    }),
+    ...plugins_for_build,
     terser(),
   ],
 };
