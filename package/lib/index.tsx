@@ -1,6 +1,6 @@
+import jsQR, { QRCode } from 'jsqr';
 import React from 'react';
 import Webcam from 'react-webcam';
-import jsQR, { QRCode } from 'jsqr';
 import { WebcamProps } from 'react-webcam';
 
 export type { QRCode };
@@ -12,7 +12,7 @@ export interface QrCodeReaderProps {
   height: number;
   onRead?: (code: QRCode) => void;
   action?: (str: string) => void;
-  videoConstraints?: MediaStreamConstraints["video"];
+  videoConstraints?: MediaStreamConstraints['video'];
 }
 
 function QrCodeReader({
@@ -21,7 +21,7 @@ function QrCodeReader({
   height,
   onRead,
   action,
-  videoConstraints
+  videoConstraints,
 }: QrCodeReaderProps): JSX.Element {
   const webcamRef = React.useRef<Webcam & HTMLVideoElement>(null);
 
