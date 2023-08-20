@@ -2,6 +2,8 @@ import typescript from '@rollup/plugin-typescript';
 import { dts } from 'rollup-plugin-dts';
 import babel from '@rollup/plugin-babel';
 import terser from "@rollup/plugin-terser";
+import resolve from "@rollup/plugin-node-resolve"
+import commonjs from "@rollup/plugin-commonjs"
 
 const entry = 'lib/index.tsx';
 
@@ -13,6 +15,8 @@ const es_config = {
   },
   external: ['react', 'react-dom'],
   plugins: [
+    resolve(),
+    commonjs(),
     typescript(),
     babel({
       babelHelpers: 'bundled',
@@ -44,6 +48,8 @@ const umd_config = {
   },
   external: ['react', 'react-dom'],
   plugins: [
+    resolve(),
+    commonjs(),
     typescript(),
     babel({
       babelHelpers: 'bundled',
