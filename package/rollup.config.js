@@ -7,6 +7,21 @@ import commonjs from "@rollup/plugin-commonjs"
 
 const entry = 'lib/index.tsx';
 
+const dts_config = {
+  input: entry,
+  output: {
+    file: 'dist/index.d.ts',
+    format: 'es',
+  },
+  plugins: [dts()],
+};
+
+const base_plugins = [
+  resolve(),
+  commonjs(),
+  typescript(),
+]
+
 const es_config = {
   input: entry,
   output: {
@@ -15,23 +30,12 @@ const es_config = {
   },
   external: ['react', 'react-dom'],
   plugins: [
-    resolve(),
-    commonjs(),
-    typescript(),
+    ...base_plugins,
     babel({
       babelHelpers: 'bundled',
       extensions: ['.ts'],
     }),
   ],
-};
-
-const dts_config = {
-  input: entry,
-  output: {
-    file: 'dist/index.d.ts',
-    format: 'es',
-  },
-  plugins: [dts()],
 };
 
 const umd_config = {
@@ -48,9 +52,7 @@ const umd_config = {
   },
   external: ['react', 'react-dom'],
   plugins: [
-    resolve(),
-    commonjs(),
-    typescript(),
+    ...base_plugins,
     babel({
       babelHelpers: 'bundled',
       extensions: ['.ts'],
