@@ -1,6 +1,6 @@
 # Start App
 
 ```bash
-$ npm install
+$ npm ci
 $ npm start
 ```
