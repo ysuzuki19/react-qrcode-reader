@@ -1,6 +1,6 @@
 {
   "name": "react-qrcode-reader",
-  "version": "2.3.8",
+  "version": "2.3.9",
   "author": {
     "name": "ysuzuki19",
     "url": "https://ysuzuki19.github.io"
@@ -28,7 +28,7 @@
   "private": false,
   "scripts": {
     "test": "jest --env=jsdom --verbose",
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "pack": "npm run build && npm pack",
     "prepublishOnly": "cp ../README.md . && cp ../LICENSE . && cp ../MIGRATION.md . && npm run build"
   },

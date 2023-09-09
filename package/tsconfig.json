@@ -18,5 +18,5 @@
     "jsx": "react-jsx"
   },
   "include": ["./lib/**/*", "*.js"],
-  "exclude": ["./node_modules/", "./dist/"]
+  "exclude": ["./node_modules/", "dist-motopy"]
 }
