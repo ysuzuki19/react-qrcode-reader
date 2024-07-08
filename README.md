@@ -1,5 +1,7 @@
 # react-qrcode-reader
 
+[![npm version](https://badge.fury.io/js/react-qrcode-reader.svg)](https://badge.fury.io/js/react-qrcode-reader)
+
 QRCode Reader for modern React
 
 # install
