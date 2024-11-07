@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
 
-import QrCodeReader from 'react-qrcode-reader';
-import { useVideoDeviceInfos } from './use-video-infos';
+import QrCodeReader from 'react-qrcode-reader'
 
-const App: React.FC = () => {
+import './App.css'
+import { useVideoDeviceInfos } from './use-video-infos'
+
+function App() {
   const videoDeviceInfos = useVideoDeviceInfos();
   const [val, setVal] = React.useState('');
   const [selected, setSelected] = React.useState('default');
@@ -41,9 +43,9 @@ const App: React.FC = () => {
         action={setVal}
         videoConstraints={{ deviceId }}
       />
-      <p>{val}</p>
+      <p>Detected: "{val}"</p>
     </>
   );
-};
+}
 
 export default App;

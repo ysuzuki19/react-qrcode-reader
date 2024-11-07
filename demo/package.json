@@ -1,43 +1,30 @@
 {
-  "name": "react-qrcode-reader-demo",
-  "version": "0.1.0",
+  "name": "demo-vite",
   "private": true,
-  "dependencies": {
-    "@types/node": "^20.6.0",
-    "@types/react": "^18.0.12",
-    "@types/react-dom": "^18.0.5",
-    "jsqr": "^1.4.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-qrcode-reader": "^2.3.14",
-    "react-scripts": "^5.0.1",
-    "react-webcam": "^7.0.1",
-    "typescript": "^5.4.5",
-    "web-vitals": "^4.1.1"
-  },
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "dev": "BROWSER=NONE npm start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-qrcode-reader": "file:../package/react-qrcode-reader-2.3.15.tgz"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@eslint/js": "^9.13.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "eslint": "^9.13.0",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-react-refresh": "^0.4.14",
+    "globals": "^15.11.0",
+    "typescript": "~5.6.2",
+    "typescript-eslint": "^8.11.0",
+    "vite": "^5.4.10"
   }
 }

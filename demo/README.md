@@ -1,6 +1,6 @@
-# Start App
+# Start Demo
 
 ```bash
 $ npm ci
-$ npm start
+$ npm run dev
 ```
