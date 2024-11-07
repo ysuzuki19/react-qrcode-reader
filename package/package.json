@@ -1,6 +1,6 @@
 {
   "name": "react-qrcode-reader",
-  "version": "2.3.14",
+  "version": "2.3.15",
   "author": {
     "name": "ysuzuki19",
     "url": "https://ysuzuki19.github.io"
@@ -51,7 +51,7 @@
     "@types/jest": "^29.2.6",
     "@ysuzuki19/eslint-config": "^3.0.0",
     "jest": "^29.4.0",
-    "rollup": "^4.9.5",
+    "rollup": "^4.22.4",
     "rollup-plugin-dts": "^6.0.0",
     "ts-jest": "^29.0.5"
   },
