@@ -1,6 +1,6 @@
 {
   "name": "react-qrcode-reader",
-  "version": "2.3.16",
+  "version": "2.3.17",
   "author": {
     "name": "ysuzuki19",
     "url": "https://ysuzuki19.github.io"
@@ -32,13 +32,15 @@
     "pack": "npm run build && npm pack",
     "prepublishOnly": "cp ../README.md . && cp ../LICENSE . && cp ../MIGRATION.md . && npm run build"
   },
+  "peerDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
+  },
   "dependencies": {
     "@types/node": "^20.3.2",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
     "jsqr": "^1.4.0",
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
     "react-webcam": "^7.0.1",
     "typescript": "^5.4.5"
   },
