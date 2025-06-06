@@ -10,6 +10,15 @@ QRCode Reader for modern React
 $ npm i react-qrcode-reader
 ```
 
+# package and React version compatibility
+
+| react-qrcode-reader version | React version |
+| --------------------------- | ------------- |
+| 3.x.x                       | 19.x          |
+| 2.x.x                       | 18.x, 17.x    |
+
+Please ensure your React version matches the supported version of the package.
+
 # how to use
 
 ## 1. with onRead
