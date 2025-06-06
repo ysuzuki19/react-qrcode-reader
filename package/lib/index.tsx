@@ -22,7 +22,7 @@ function QrCodeReader({
   onRead,
   action,
   videoConstraints,
-}: QrCodeReaderProps): JSX.Element {
+}: QrCodeReaderProps) {
   const webcamRef = React.useRef<Webcam & HTMLVideoElement>(null);
 
   const analyze = React.useCallback(() => {
