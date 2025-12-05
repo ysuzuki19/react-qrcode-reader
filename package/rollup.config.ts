@@ -19,7 +19,7 @@ const dts_config = {
 const plugins_for_build = [
   resolve(),
   commonjs(),
-  typescript(),
+  typescript({ compilerOptions: { outDir: 'dist' } }),
   babel({
     babelHelpers: 'bundled',
     extensions: ['.ts'],
