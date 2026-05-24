@@ -112,5 +112,9 @@ package/MIGRATION.md
 # Playwright
 package/test-results/
 package/playwright-report/
+package/playwright-report-smoke/
 package/playwright/.cache/
 package/e2e/fixtures/video/*.y4m
+
+# Smoke fixture install artifacts (rebuilt by `npm run smoke`)
+package/smoke/node_modules/

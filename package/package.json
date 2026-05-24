@@ -32,6 +32,7 @@
     "fixtures:gen": "node e2e/fixtures/video/gen-fixtures.mjs",
     "pree2e": "npm run fixtures:gen",
     "e2e": "playwright test",
+    "smoke": "node scripts/smoke.mjs",
     "lint": "eslint --ext js,ts,tsx \"./lib/*\"",
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "pack": "npm run build && npm pack",

@@ -1,23 +1,98 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
+# Publishes the package to npm when a GitHub Release is created.
+# Gates publishing on the same e2e + smoke (built-artifact) tests that run on PRs.
 
 name: Publish Package to npm
+
 on:
   release:
     types: [created]
 
 jobs:
-  build:
+  e2e:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ./package
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 16
-          registry-url: https://registry.npmjs.org/
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package/package-lock.json
+
+      - name: Install ffmpeg (for QR fixture generation)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
       - run: npm ci
-        working-directory: ./package
-      - run: npm publish --access public
-        working-directory: ./package
+
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run e2e
         env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
+          CI: 'true'
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: ${{ !cancelled() }}
+        with:
+          name: release-playwright-report-e2e
+          path: package/playwright-report/
+          retention-days: 14
+
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: ./package
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package/package-lock.json
+
+      - name: Install ffmpeg (for QR fixture generation)
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - run: npm ci
+
+      - run: npx playwright install --with-deps chromium
+
+      - run: npm run smoke
+        env:
+          CI: 'true'
+
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        if: ${{ !cancelled() }}
+        with:
+          name: release-playwright-report-smoke
+          path: package/playwright-report-smoke/
+          retention-days: 14
+
+  publish:
+    needs: [e2e, smoke]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    defaults:
+      run:
+        working-directory: ./package
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+          cache-dependency-path: package/package-lock.json
+
+      - run: npm ci
+
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

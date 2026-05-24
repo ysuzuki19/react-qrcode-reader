@@ -5,12 +5,17 @@ const PAYLOAD_BY_PROJECT: Record<string, string> = {
   url: 'https://example.com',
 };
 
-test('detects QR payload from fake camera', async ({ page }, testInfo) => {
+test('action and onRead callbacks both fire on QR detection', async ({ page }, testInfo) => {
   const expected = PAYLOAD_BY_PROJECT[testInfo.project.name];
   if (!expected) {
     throw new Error(`no payload mapping for project ${testInfo.project.name}`);
   }
   await page.goto('/');
+  // action receives the string payload.
   await expect(page.getByTestId('detected')).toHaveText(expected, { timeout: 15_000 });
-  await expect.poll(async () => Number(await page.getByTestId('callcount').textContent())).toBeGreaterThan(0);
+  // onRead receives the full QRCode object; we display .data — same string.
+  await expect(page.getByTestId('onread')).toHaveText(expected);
+  await expect
+    .poll(async () => Number(await page.getByTestId('callcount').textContent()))
+    .toBeGreaterThan(0);
 });
