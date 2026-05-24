@@ -38,6 +38,7 @@ export default defineConfig({
         'qr-read.spec.ts',
         'props.spec.ts',
         'video-constraints.spec.ts',
+        'unmount.spec.ts',
       ],
       use: {
         browserName: 'chromium',

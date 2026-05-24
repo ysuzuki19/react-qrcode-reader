@@ -77,9 +77,14 @@ if (!existsSync(installed)) {
   process.exit(1);
 }
 
-// 6. Run the smoke Playwright config (which uses port 4174 and the hello.y4m
-// fake camera). pree2e (y4m generation) is not wired here; if y4m is missing
-// we generate it explicitly.
+// 6. Type-check the consumer fixture against the built artifact's .d.ts.
+// This must run AFTER the overlay so @types/react (transitive via the
+// tarball's `dependencies`) and dist/index.d.ts are present.
+step('typecheck smoke/ against dist/index.d.ts');
+run('npm', ['run', 'typecheck'], { cwd: smokeDir });
+
+// 7. Run the smoke Playwright config (port 4174, hello.y4m fake camera).
+// pree2e (y4m generation) is not wired here; ensure y4m exists explicitly.
 step('ensure y4m fixtures exist');
 run('node', ['e2e/fixtures/video/gen-fixtures.mjs'], { cwd: packageDir });
 

@@ -19,6 +19,7 @@ export default function App() {
   const [detected, setDetected] = React.useState('');
   const [onReadPayload, setOnReadPayload] = React.useState('');
   const [callCount, setCallCount] = React.useState(0);
+  const [mounted, setMounted] = React.useState(true);
 
   const handleAction = React.useCallback((value: string) => {
     setDetected(value);
@@ -42,14 +43,16 @@ export default function App() {
         <dt>deviceId</dt>
         <dd data-testid="deviceId">{deviceId || '(none)'}</dd>
       </dl>
-      <QrCodeReader
-        delay={delay}
-        width={width}
-        height={height}
-        action={handleAction}
-        onRead={handleOnRead}
-        videoConstraints={deviceId ? { deviceId } : undefined}
-      />
+      {mounted && (
+        <QrCodeReader
+          delay={delay}
+          width={width}
+          height={height}
+          action={handleAction}
+          onRead={handleOnRead}
+          videoConstraints={deviceId ? { deviceId } : undefined}
+        />
+      )}
       <p>
         detected: <span data-testid="detected">{detected}</span>
       </p>
@@ -59,6 +62,16 @@ export default function App() {
       <p>
         callcount: <span data-testid="callcount">{callCount}</span>
       </p>
+      <p>
+        mounted: <span data-testid="mounted">{String(mounted)}</span>
+      </p>
+      <button
+        type="button"
+        data-testid="unmount"
+        onClick={() => setMounted(false)}
+      >
+        unmount
+      </button>
     </div>
   );
 }
