@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import QrCodeReader from 'react-qrcode-reader'
+import QrCodeReader from 'react-qrcode-reader';
 
-import './App.css'
-import { useVideoDeviceInfos } from './use-video-infos'
+import './App.css';
+import { useVideoDeviceInfos } from './use-video-infos';
 
 function App() {
   const videoDeviceInfos = useVideoDeviceInfos();
@@ -20,13 +20,14 @@ function App() {
           setDeviceId(event.target.value);
           const deviceLabel =
             videoDeviceInfos.find(
-              (info) => info.deviceId === event.target.value
+              (info) => info.deviceId === event.target.value,
             )?.label || 'not selected';
           setSelected(deviceLabel);
         }}
       >
         {videoDeviceInfos.map((info) => (
           <option
+            key={info.deviceId}
             value={info.deviceId}
             label={info.label}
             onClick={() => setDeviceId(info.deviceId)}

@@ -1,10 +1,8 @@
-import jsQR, { QRCode } from 'jsqr';
+import jsQR, { type QRCode } from 'jsqr';
 import React from 'react';
-import Webcam from 'react-webcam';
-import { WebcamProps } from 'react-webcam';
+import Webcam, { type WebcamProps } from 'react-webcam';
 
-export type { QRCode };
-export type { WebcamProps };
+export type { QRCode, WebcamProps };
 
 export interface QrCodeReaderProps {
   delay: number;
@@ -41,7 +39,7 @@ function QrCodeReader({
       if (onRead) onRead(code);
       if (action) action(code.data);
     }
-  }, [webcamRef, width, height, onRead, action]);
+  }, [width, height, onRead, action]);
 
   React.useEffect(() => {
     const interval = setInterval(() => {
