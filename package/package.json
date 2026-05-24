@@ -26,6 +26,9 @@
     "dist"
   ],
   "private": false,
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "test": "jest --env=jsdom --verbose",
     "fixture:dev": "vite e2e/fixture",
