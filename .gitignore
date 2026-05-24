@@ -113,3 +113,4 @@ package/MIGRATION.md
 package/test-results/
 package/playwright-report/
 package/playwright/.cache/
+package/e2e/fixtures/video/*.y4m

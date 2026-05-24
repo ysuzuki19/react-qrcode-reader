@@ -29,6 +29,8 @@
   "scripts": {
     "test": "jest --env=jsdom --verbose",
     "fixture:dev": "vite e2e/fixture",
+    "fixtures:gen": "node e2e/fixtures/video/gen-fixtures.mjs",
+    "pree2e": "npm run fixtures:gen",
     "e2e": "playwright test",
     "lint": "eslint --ext js,ts,tsx \"./lib/*\"",
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
