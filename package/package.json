@@ -28,6 +28,8 @@
   "private": false,
   "scripts": {
     "test": "jest --env=jsdom --verbose",
+    "fixture:dev": "vite e2e/fixture",
+    "e2e": "playwright test",
     "lint": "eslint --ext js,ts,tsx \"./lib/*\"",
     "build": "rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "pack": "npm run build && npm pack",
@@ -46,20 +48,25 @@
     "typescript": "^5.4.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/jest": "^30.0.0",
+    "@vitejs/plugin-react": "^5.2.0",
     "@ysuzuki19/eslint-config": "^5.1.0",
     "eslint": "^9.36.0",
     "jest": "^30.1.3",
     "jest-environment-jsdom": "^30.1.2",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
     "rollup": "^4.22.4",
     "rollup-plugin-dts": "^6.0.0",
     "ts-jest": "^29.0.5",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "vite": "^7.3.3"
   },
   "browserslist": {
     "production": [

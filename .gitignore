@@ -108,3 +108,8 @@ yarn.lock
 package/LICENSE
 package/README.md
 package/MIGRATION.md
+
+# Playwright
+package/test-results/
+package/playwright-report/
+package/playwright/.cache/
