@@ -42,6 +42,10 @@ jobs:
   smoke:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        react: [18, 19]
     defaults:
       run:
         working-directory: ./package
@@ -64,10 +68,11 @@ jobs:
       - run: npm run smoke
         env:
           CI: 'true'
+          REACT_VERSION: ${{ matrix.react }}
 
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
-          name: playwright-report-smoke
+          name: playwright-report-smoke-react${{ matrix.react }}
           path: package/playwright-report-smoke/
           retention-days: 14
