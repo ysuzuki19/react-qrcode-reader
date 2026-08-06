@@ -14,10 +14,14 @@ $ npm i react-qrcode-reader
 
 | react-qrcode-reader version | React version |
 | --------------------------- | ------------- |
-| 3.x.x                       | 19.x          |
+| 3.1.x                       | 19.x, 18.x    |
+| 3.0.x                       | 19.x          |
 | 2.x.x                       | 18.x, 17.x    |
 
 Please ensure your React version matches the supported version of the package.
+
+Since 3.1.0 the package no longer ships `@types/react` as a runtime dependency, so its
+types resolve against the `@types/react` in your own project.
 
 # how to use
 

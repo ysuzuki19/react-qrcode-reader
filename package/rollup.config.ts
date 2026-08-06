@@ -19,7 +19,11 @@ const dts_config = {
 const plugins_for_build = [
   resolve(),
   commonjs(),
-  typescript({ compilerOptions: { outDir: 'dist' } }),
+  // The classic runtime keeps the emitted code's only React dependency on
+  // `react` itself. `react-jsx` would emit `react/jsx-runtime`, which has no
+  // UMD global and would therefore have to be inlined into the UMD bundle --
+  // pinning the published artifact to one React major.
+  typescript({ compilerOptions: { outDir: 'dist', jsx: 'react' } }),
   babel({
     babelHelpers: 'bundled',
     extensions: ['.ts'],
@@ -27,7 +31,11 @@ const plugins_for_build = [
   }),
 ];
 
-const external = ['react', 'react-dom'];
+const external = (id) =>
+  id === 'react' ||
+  id.startsWith('react/') ||
+  id === 'react-dom' ||
+  id.startsWith('react-dom/');
 
 const es_config = {
   input: entry,
@@ -48,7 +56,7 @@ const umd_config = {
     exports: 'named',
     indent: false,
     globals: {
-      react: 'react',
+      react: 'React',
     },
   },
   external,
