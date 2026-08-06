@@ -1,0 +1,89 @@
+# Publishes to npm when package/package.json's version changes on main.
+#
+# The GitHub Release is an OUTPUT of this flow, not its trigger: it is created
+# from the published version so the release notes still serve as the changelog
+# surface (Dependabot embeds them in its update PRs).
+#
+# GITHUB_TOKEN-created events do not start other workflows, so detecting,
+# publishing and releasing all have to live in this one workflow rather than
+# chaining through a release event.
+
+name: Release
+
+on:
+  push:
+    branches: [main]
+    paths: ['package/package.json']
+  workflow_dispatch:
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  detect:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.detect.outputs.version }}
+      should_release: ${{ steps.detect.outputs.should_release }}
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      # The tag is the idempotency key: a version whose tag already exists has
+      # been released, so re-runs and pushes that touch package.json for other
+      # reasons (dependency bumps, script edits) are no-ops.
+      - id: detect
+        run: |
+          version=$(node -p "require('./package/package.json').version")
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/v$version" >/dev/null 2>&1; then
+            echo "v$version is already tagged; nothing to release"
+            echo "should_release=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "v$version is not tagged yet; releasing"
+            echo "should_release=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  checks:
+    needs: detect
+    if: needs.detect.outputs.should_release == 'true'
+    uses: ./.github/workflows/checks.yml
+
+  publish:
+    needs: [detect, checks]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    # Gates publishing behind a manual approval so the checks above can be
+    # reviewed first. Reviewers are configured in Settings > Environments.
+    environment: npm-publish
+    permissions:
+      contents: write # create the tag and the GitHub Release
+    defaults:
+      run:
+        working-directory: ./package
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org/
+          cache: npm
+          cache-dependency-path: package/package-lock.json
+
+      - run: npm ci
+
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # Runs after publish so a release only ever describes a version that
+      # actually reached npm. It also creates the tag, which is what makes a
+      # re-run of this workflow a no-op.
+      - name: Create GitHub Release
+        run: gh release create "v$VERSION" --title "v$VERSION" --generate-notes
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VERSION: ${{ needs.detect.outputs.version }}
