@@ -1,11 +1,11 @@
-# Publishes the package to npm when a GitHub Release is created.
-# Gates publishing on the same e2e + smoke (built-artifact) tests that run on PRs.
+# The test suites that gate both PRs and releases. Called by e2e.yml (on push /
+# pull_request) and by release.yml (before publishing), so a release runs the
+# exact same checks a PR does.
 
-name: Publish Package to npm
+name: Checks
 
 on:
-  release:
-    types: [created]
+  workflow_call:
 
 jobs:
   e2e:
@@ -37,7 +37,7 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
-          name: release-playwright-report-e2e
+          name: playwright-report-e2e
           path: package/playwright-report/
           retention-days: 14
 
@@ -75,29 +75,6 @@ jobs:
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         if: ${{ !cancelled() }}
         with:
-          name: release-playwright-report-smoke-react${{ matrix.react }}
+          name: playwright-report-smoke-react${{ matrix.react }}
           path: package/playwright-report-smoke/
           retention-days: 14
-
-  publish:
-    needs: [e2e, smoke]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    defaults:
-      run:
-        working-directory: ./package
-    steps:
-      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
-
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
-        with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org/
-          cache: npm
-          cache-dependency-path: package/package-lock.json
-
-      - run: npm ci
-
-      - run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
