@@ -23,8 +23,7 @@
   },
   "include": [
     "./lib/**/*",
-    "*.js",
-    "jest.config.ts"
+    "*.js"
   ],
   "exclude": [
     "./node_modules/",

@@ -21,7 +21,8 @@ $ npm i react-qrcode-reader
 Please ensure your React version matches the supported version of the package.
 
 Since 3.1.0 the package no longer ships `@types/react` as a runtime dependency, so its
-types resolve against the `@types/react` in your own project.
+types resolve against the `@types/react` in your own project. With React 18, this requires
+`@types/react` 18.2.6 or later.
 
 # how to use
 
