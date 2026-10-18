@@ -50,25 +50,25 @@
     "react-webcam": "^7.0.1"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.4.15",
-    "@playwright/test": "^1.60.0",
+    "@biomejs/biome": "^2.5.15",
+    "@playwright/test": "^1.64.1",
     "@rollup/plugin-babel": "^6.0.3",
     "@rollup/plugin-commonjs": "^28.0.6",
     "@rollup/plugin-node-resolve": "^16.0.1",
     "@rollup/plugin-terser": "^1.0.0",
     "@rollup/plugin-typescript": "^12.1.4",
     "@types/node": "^24.5.2",
-    "@types/react": "^19.1.6",
-    "@types/react-dom": "^19.1.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "@vitejs/plugin-react": "^5.2.0",
     "qrcode": "^1.5.4",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
-    "rollup": "^4.22.4",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "rollup": "^4.64.8",
     "rollup-plugin-dts": "^6.0.0",
     "tslib": "^2.8.1",
     "typescript": "^5.4.5",
-    "vite": "^8.0.16"
+    "vite": "^8.3.4"
   },
   "browserslist": {
     "production": [
